@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 
 import IngredientForm from "./IngredientForm"
 import IngredientList from "./IngredientList"
@@ -27,7 +27,15 @@ const Ingredients = () => {
 		])
 	}
 
-	const removeIngredientHandler = (ingredientId) => {
+	const removeIngredientHandler = async (ingredientId) => {
+		const res = await fetch(
+			`https://hooks-ref-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
+			{
+				method: "DELETE",
+			}
+		)
+		const data = await res.json()
+		console.log(data)
 		setIngredients((prevIngredients) =>
 			prevIngredients.filter(
 				(ingredient) => ingredient.id !== ingredientId
