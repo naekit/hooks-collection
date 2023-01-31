@@ -13,8 +13,8 @@ const IngredientForm = React.memo((props) => {
 	const submitHandler = (event) => {
 		event.preventDefault()
 		// ...
-		props.addIngredient({ title, amount })
 		formRef.current.reset()
+		props.addIngredient({ title, amount })
 	}
 
 	return (
