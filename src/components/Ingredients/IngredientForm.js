@@ -6,21 +6,21 @@ import "./IngredientForm.css"
 
 const IngredientForm = React.memo((props) => {
 	// const [formData, setFormData] = useState({ title: "", amount: "" })
-	const formRef = useRef()
 	const [title, setTitle] = useState("")
 	const [amount, setAmount] = useState("")
 
 	const submitHandler = (event) => {
 		event.preventDefault()
 		// ...
-		formRef.current.reset()
 		props.addIngredient({ title, amount })
+		setTitle("")
+		setAmount("")
 	}
 
 	return (
 		<section className="ingredient-form">
 			<Card>
-				<form ref={formRef} onSubmit={submitHandler}>
+				<form onSubmit={submitHandler}>
 					<div className="form-control">
 						<label htmlFor="title">Name</label>
 						<input
