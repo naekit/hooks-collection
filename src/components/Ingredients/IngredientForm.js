@@ -10,7 +10,6 @@ const IngredientForm = React.memo((props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault()
-		console.log(title, amount)
 		// ...
 		props.addIngredient({ title, amount })
 	}
