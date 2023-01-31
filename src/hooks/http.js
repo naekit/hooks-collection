@@ -1,5 +1,13 @@
 import { useCallback, useReducer, useState } from "react"
 
+const initialState = {
+	loading: false,
+	error: null,
+	data: null,
+	extra: null,
+	identifier: null,
+}
+
 // a custom useHttp hook to handle http requests using fetch API
 const httpReducer = (curHttpState, action) => {
 	switch (action.type) {
@@ -21,20 +29,18 @@ const httpReducer = (curHttpState, action) => {
 		case "ERROR":
 			return { loading: false, error: action.errorMessage }
 		case "CLEAR":
-			return { ...curHttpState, error: null }
+			return initialState
 		default:
 			throw new Error("Should not be reached!")
 	}
 }
 
 const useHttp = () => {
-	const [httpState, dispatchHttp] = useReducer(httpReducer, {
-		loading: false,
-		error: null,
-		data: null,
-		extra: null,
-		identifier: null,
-	})
+	const [httpState, dispatchHttp] = useReducer(httpReducer, initialState)
+
+	const clear = useCallback(() => {
+		dispatchHttp({ type: "CLEAR" })
+	}, [])
 
 	const sendRequest = useCallback(
 		async (url, method, body, extra, reqIdentifier) => {
@@ -73,6 +79,7 @@ const useHttp = () => {
 		clearError,
 		extra: httpState.extra,
 		identifier: httpState.identifier,
+		clear,
 	}
 }
 
