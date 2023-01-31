@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 
 import Card from "../UI/Card"
 import LoadingIndicator from "../UI/LoadingIndicator"
@@ -6,6 +6,7 @@ import "./IngredientForm.css"
 
 const IngredientForm = React.memo((props) => {
 	// const [formData, setFormData] = useState({ title: "", amount: "" })
+	const formRef = useRef()
 	const [title, setTitle] = useState("")
 	const [amount, setAmount] = useState("")
 
@@ -13,12 +14,13 @@ const IngredientForm = React.memo((props) => {
 		event.preventDefault()
 		// ...
 		props.addIngredient({ title, amount })
+		formRef.current.reset()
 	}
 
 	return (
 		<section className="ingredient-form">
 			<Card>
-				<form onSubmit={submitHandler}>
+				<form ref={formRef} onSubmit={submitHandler}>
 					<div className="form-control">
 						<label htmlFor="title">Name</label>
 						<input
