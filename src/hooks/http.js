@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useState } from "react"
+import { useCallback, useReducer } from "react"
 
 const initialState = {
 	loading: false,
@@ -8,7 +8,6 @@ const initialState = {
 	identifier: null,
 }
 
-// a custom useHttp hook to handle http requests using fetch API
 const httpReducer = (curHttpState, action) => {
 	switch (action.type) {
 		case "SEND":
