@@ -66,16 +66,11 @@ const useHttp = () => {
 		[]
 	)
 
-	const clearError = useCallback(() => {
-		dispatchHttp({ type: "CLEAR" })
-	}, [])
-
 	return {
 		loading: httpState.loading,
 		error: httpState.error,
 		data: httpState.data,
 		sendRequest,
-		clearError,
 		extra: httpState.extra,
 		identifier: httpState.identifier,
 		clear,
